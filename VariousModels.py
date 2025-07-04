@@ -131,3 +131,5 @@ from sklearn.metrics import r2_score, mean_squared_error
 
 print("R² Score:", r2_score(y_test, y_pred))
 
+# we select random forest from here and apply the rest of the portions with that.
+
