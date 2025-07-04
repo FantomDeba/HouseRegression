@@ -54,7 +54,7 @@ def parse_rating_list(rating_list):
                 rating_dict[category] = rating
     return rating_dict
 
-d = pd.read_csv("E:/placement/houses.csv")
+d = pd.read_csv("E:\placement\HouseRegression\houses.csv")
 d['price'] = d['price'].str.extract(r'(\d+(?:\.\d+)?)').astype(float)
 y = d['price']
 d.drop(['link', 'property_id', 'description', 'nearbyLocations', 'property_name'], axis=1, inplace=True)
@@ -89,4 +89,5 @@ df['area_number']=df['area_number'].fillna(df['area_number'].mean())
 df['area_sq_m'] = df['area_sq_m'].fillna(df['area_sq_m'].mean())
 df['rate'] = df['rate'].fillna(df['rate'].mean())
 df['price'] = df['price'].fillna(df['price'].mean())
-df.to_csv("E:/placement/processed_houses.csv", index=False)
+df = df.drop(columns=['bathroom', 'bedRoom', 'Natural Light', 'Airy Rooms'])
+df.to_csv("E:/placement/HouseRegression/processed_houses.csv", index=False)

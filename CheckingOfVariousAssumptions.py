@@ -61,3 +61,30 @@ iso = IsolationForest(contamination=0.05, random_state=42)
 outlier_flags = iso.fit_predict(X_train_scaled)
 
 print(f"Detected outliers based on IsolationForest : {(outlier_flags == -1).sum()}")
+
+#Check for heteroscedasticity
+
+import matplotlib.pyplot as plt
+residuals = y_test - y_pred
+plt.figure(figsize=(8, 5))
+plt.scatter(y_pred, residuals, alpha=0.5)
+plt.axhline(0, color='red', linestyle='--')
+plt.xlabel("Predicted Values")
+plt.ylabel("Residuals")
+plt.title("Residuals vs Predicted Values (Random Forest)")
+plt.grid(True)
+plt.show()
+
+import pandas as pd
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+import numpy as np
+X_numeric = df.select_dtypes(include=[np.number]).drop(columns=['price'])
+X_numeric = X_numeric.loc[:, X_numeric.std() > 0]
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X_numeric)
+vif_data = pd.DataFrame()
+vif_data['Feature'] = X_numeric.columns
+vif_data['VIF'] = [variance_inflation_factor(X_scaled, i) for i in range(X_scaled.shape[1])]
+vif_data = vif_data.sort_values(by='VIF', ascending=False)
+print(vif_data.head(10))
