@@ -1,0 +1,9 @@
+📊 Stacked Ensemble Evaluation:
+➡️ RMSE       : 12.89
+➡️ R²          : 0.6845
+PS E:\placement\HouseRegression> python -u "e:\placement\HouseRegression\XGBOOST.py"
+XGBoost RMSE: 12.90
+📊 XGBoost Evaluation Metrics:
+➡️ MSE        : 166.52
+➡️ RMSE       : 12.90
+➡️ R²          : 0.6839
